@@ -4,11 +4,11 @@
 
 # Untitled Goose Game
   
-Indie  
-2019-09-20 00:00:00  
-nan  
-1  
-1
+TAG Indie  
+发售日 2019-09-20 00:00:00  
+备注 no data  
+总评人数 1  
+好评人数 1
 ## xxd +1
 
 

@@ -4,11 +4,11 @@
 
 # Into the breach
   
-战棋 / 策略 / Roguelike / Indie  
-2018-02-27 00:00:00  
-nan  
-2  
-2
+TAG 战棋 / 策略 / Roguelike / Indie  
+发售日 2018-02-27 00:00:00  
+备注 no data  
+总评人数 2  
+好评人数 2
 ## xgs +1
 
 

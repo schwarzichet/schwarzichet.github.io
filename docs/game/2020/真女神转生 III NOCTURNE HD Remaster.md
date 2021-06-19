@@ -4,11 +4,11 @@
 
 # 真女神转生 III NOCTURNE HD Remaster
   
-JRPG  
-2020-10-29 00:00:00  
-nan  
-2  
-2
+TAG JRPG  
+发售日 2020-10-29 00:00:00  
+备注 no data  
+总评人数 2  
+好评人数 2
 ## M +1
 
 

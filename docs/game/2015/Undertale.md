@@ -4,11 +4,11 @@
 
 # Undertale
   
-像素 / meta / Indie  
-2015-05-16 00:00:00  
-nan  
-2  
-2
+TAG 像素 / meta / Indie  
+发售日 2015-05-16 00:00:00  
+备注 no data  
+总评人数 2  
+好评人数 2
 ## emiya +1
 
 
