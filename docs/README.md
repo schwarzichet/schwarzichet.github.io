@@ -1,3 +1,3 @@
 # ZJU Console
 
-fandui 17 xuejie
+zhichi 7 dang, fandui 17

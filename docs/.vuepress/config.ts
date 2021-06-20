@@ -45,22 +45,23 @@ export default defineUserConfig<DefaultThemeOptions>({
     bundler: '@vuepress/vite',
 
     themeConfig: {
-        // logo: 'https://vuejs.org/images/logo.png',
+        contributors: false,
+        logo: '/images/zju_console.jpg',
         sidebar: result,
 
     },
 
     plugins: [
-    [
-      '@vuepress/plugin-search',
-      {
-        locales: {
-          '/': {
-            placeholder: 'Search',
-            maxSuggestions: 3,
-          }
-        },
-      },
+        [
+            '@vuepress/plugin-search',
+            {
+                locales: {
+                    '/': {
+                        placeholder: 'Search',
+                        maxSuggestions: 3,
+                    }
+                },
+            },
+        ],
     ],
-  ],
 })
