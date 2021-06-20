@@ -42,9 +42,25 @@ export default defineUserConfig<DefaultThemeOptions>({
     lang: 'en-US',
     title: 'ZJU Console',
     description: 'Just playing around',
+    bundler: '@vuepress/vite',
 
     themeConfig: {
         // logo: 'https://vuejs.org/images/logo.png',
         sidebar: result,
-    }
+
+    },
+
+    plugins: [
+    [
+      '@vuepress/plugin-search',
+      {
+        locales: {
+          '/': {
+            placeholder: 'Search',
+            maxSuggestions: 3,
+          }
+        },
+      },
+    ],
+  ],
 })
