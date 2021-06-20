@@ -55,12 +55,7 @@ export default defineUserConfig<DefaultThemeOptions>({
         [
             '@vuepress/plugin-search',
             {
-                locales: {
-                    '/': {
-                        placeholder: 'Search',
-                        maxSuggestions: 3,
-                    }
-                },
+                maxSuggestions: 100,
             },
         ],
     ],
