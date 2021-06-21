@@ -2,11 +2,11 @@ import { defineUserConfig } from 'vuepress'
 import type { DefaultThemeOptions } from 'vuepress'
 import fs from 'fs';
 import glob from 'glob';
+import path from 'path'
 
 const getDirContent = (source: fs.PathLike) =>
     fs.readdirSync(source, { withFileTypes: true })
-        .filter(entry => entry.name[0] != '.' && entry.name != 'README.md')
-        .map(entry => source + entry.name)
+        .filter(entry => entry.name[0] != '.' && entry.name != 'README.md').sort((a, b) => parseInt(b.name) - parseInt(a.name)).map(entry => source + entry.name)
 
 
 let allDir = glob.sync('docs/**/').map(f => '/' + f.substr(5));
@@ -34,16 +34,13 @@ for (const [key, value] of Object.entries(result)) {
     }
 }
 
-
-result['/game/2021/'].unshift({ text: "Back to Game", link: '/game/' })
-
-
 export default defineUserConfig<DefaultThemeOptions>({
     lang: 'en-US',
     title: 'ZJU Console',
     description: 'Just playing around',
     bundler: '@vuepress/vite',
 
+    // theme: path.resolve(__dirname, 'theme'),
     themeConfig: {
         contributors: false,
         logo: '/images/zju_console.jpg',

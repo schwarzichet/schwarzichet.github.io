@@ -62,7 +62,7 @@ for gs in game_sheets:
                     comment: str = i[1]
                     if not comment or comment.isspace():
                         continue
-                    seps = list(re.finditer("；|：", comment))
+                    seps = list(re.finditer("；|：|;", comment))
                     score, comment, name = (
                         comment[: seps[0].start()],
                         comment[seps[0].end() : seps[-1].start()],
