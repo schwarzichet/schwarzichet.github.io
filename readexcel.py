@@ -29,6 +29,13 @@ for gs in game_sheets:
         year = date.year
         print(name, year)
 
+        if not os.path.exists("docs/game/README.md"):
+            Path("docs/game/").mkdir(parents=True, exist_ok=True)
+            readme_mdFile = MdUtils(file_name="docs/game/README.md")
+            readme_mdFile.new_header(1,"Game")
+            readme_mdFile.new_line(f"This is for games.")
+            readme_mdFile.create_md_file()
+
         if not os.path.exists("docs/game/" + str(year)):
             Path("docs/game/" + str(year)).mkdir(parents=True, exist_ok=True)
 
