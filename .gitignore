@@ -125,5 +125,8 @@ dist
 
 
 
-gamelife.xlsx
+# gamelife.xlsx
 test.js
+
+.vscode
+.mypy_cache
