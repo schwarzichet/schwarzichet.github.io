@@ -130,3 +130,5 @@ test.js
 
 .vscode
 .mypy_cache
+
+docs/game
