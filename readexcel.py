@@ -29,11 +29,11 @@ for gs in game_sheets:
         year = date.year
         print(name, year)
 
-        if not os.path.exists("docs/game/"+str(year)):
-            Path("docs/game/"+str(year)).mkdir(parents=False, exist_ok=True)
+        if not os.path.exists("docs/game/" + str(year)):
+            Path("docs/game/" + str(year)).mkdir(parents=True, exist_ok=True)
 
-        if not os.path.exists("docs/game/"+str(year) + "/README.md"):
-            readme_mdFile = MdUtils(file_name="docs/game/"+str(year) + "/README.md")
+        if not os.path.exists("docs/game/" + str(year) + "/README.md"):
+            readme_mdFile = MdUtils(file_name="docs/game/" + str(year) + "/README.md")
             readme_mdFile.new_header(1, str(year))
             readme_mdFile.new_line(f"This is for {year}'s games.")
             readme_mdFile.create_md_file()
@@ -43,14 +43,17 @@ for gs in game_sheets:
         if ":" in name:
             name = name.replace(":", "Colon")
 
-        mdFile = MdUtils(file_name="docs/game/"+str(year) + "/" + name)
+        mdFile = MdUtils(file_name="docs/game/" + str(year) + "/" + name)
         mdFile.new_header(1, game["作品名"])
         # mdFile.new_table_of_contents(table_title='Contents', depth=2)
         meta_info = ["TAG", "发售日", "备注", "总评人数", "好评人数"]
         for i in meta_info:
             if i in game.keys():
                 if not pandas.isna(game[i]):
-                    mdFile.new_line(i + ": " + str(game[i]))
+                    if i == "发售日":
+                        mdFile.new_line(i + ": " + str(game[i].strftime("%Y-%m-%d")))
+                    else:
+                        mdFile.new_line(i + ": " + str(game[i]))
                 else:
                     mdFile.new_line(i + ": no data~")
             else:
