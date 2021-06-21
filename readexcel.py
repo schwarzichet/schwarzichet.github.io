@@ -50,11 +50,11 @@ for gs in game_sheets:
         for i in meta_info:
             if i in game.keys():
                 if not pandas.isna(game[i]):
-                    mdFile.new_line(i + " " + str(game[i]))
+                    mdFile.new_line(i + ": " + str(game[i]))
                 else:
-                    mdFile.new_line(i + " no data")
+                    mdFile.new_line(i + ": no data~")
             else:
-                mdFile.new_line(i + " no data")
+                mdFile.new_line(i + ": no data~")
 
         try:
             for i in game.iteritems():
