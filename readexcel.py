@@ -2,12 +2,13 @@ from os import sep
 from typing import List, Tuple, Any
 from numpy import NaN, remainder
 import pandas
-from mdutils.mdutils import MdUtils
+from mdutils.mdutils import MdUtils,MarkDownFile
 import markdown_strings
 import os
 from pathlib import Path
 import sys
 import re
+import yaml
 
 game_sheets = ["2014-2000年", "2015-2021年", "古早作品"]
 
@@ -32,7 +33,7 @@ for gs in game_sheets:
         if not os.path.exists("docs/game/README.md"):
             Path("docs/game/").mkdir(parents=True, exist_ok=True)
             readme_mdFile = MdUtils(file_name="docs/game/README.md")
-            readme_mdFile.new_header(1,"Game")
+            readme_mdFile.new_header(1, "Game")
             readme_mdFile.new_line(f"This is for games.")
             readme_mdFile.create_md_file()
 
@@ -51,8 +52,14 @@ for gs in game_sheets:
             name = name.replace(":", "Colon")
 
         mdFile = MdUtils(file_name="docs/game/" + str(year) + "/" + name)
+        mdFile.title = ""
+        md_file  = MarkDownFile("docs/game/" + str(year) + "/" + name)
+        md_metadata = {"game_release_date": date.strftime("%Y-%m-%d") if not pandas.isna(date) else "unknown"}
+        mdFile.write("---\n")
+        mdFile.write(yaml.dump(md_metadata))
+        mdFile.write("---\n")
+
         mdFile.new_header(1, game["作品名"])
-        # mdFile.new_table_of_contents(table_title='Contents', depth=2)
         meta_info = ["TAG", "发售日", "备注", "总评人数", "好评人数"]
         for i in meta_info:
             if i in game.keys():
@@ -78,6 +85,12 @@ for gs in game_sheets:
                         comment[seps[0].end() : seps[-1].start()],
                         comment[seps[-1].end() :],
                     )
+
+                    if score == "+1":
+                        score = "<Badge type=\"tip\" text=\"+1\" vertical=\"middle\" />"
+                    if score == '-1':
+                        score = "<Badge type=\"danger\" text=\"-1\" vertical=\"middle\" />"
+
                     mdFile.new_header(2, name + " " + score, style="atx")
                     mdFile.new_paragraph(comment)
         except Exception as e:
@@ -88,4 +101,6 @@ for gs in game_sheets:
             # print(comment.rsplit(sep='；：', maxsplit=1))
             sys.exit()
 
+
+        print(mdFile.title, mdFile.table_of_contents)
         mdFile.create_md_file()
