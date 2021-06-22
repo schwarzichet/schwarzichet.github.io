@@ -92,7 +92,13 @@ for gs in game_sheets:
                         score = "<Badge type=\"danger\" text=\"-1\" vertical=\"middle\" />"
 
                     mdFile.new_header(2, name + " " + score, style="atx")
-                    mdFile.new_paragraph(comment)
+
+                    if len(comment) > 500:
+                        comment = "::: details 小作文警告\n" + comment + "\n:::\n"
+                        mdFile.write(comment)
+                    else:
+                        mdFile.new_paragraph(comment)
+
         except Exception as e:
             print(game)
             print(e)
