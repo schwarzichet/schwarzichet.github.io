@@ -2,6 +2,7 @@
 
 支持7党，反对17
 
+https://schwarzichet.github.io/
 
 
 ## 经常会被问到的问题
