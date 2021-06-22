@@ -86,9 +86,9 @@ for gs in game_sheets:
                         comment[seps[-1].end() :],
                     )
 
-                    if score == "+1":
+                    if score.strip() == "+1":
                         score = "<Badge type=\"tip\" text=\"+1\" vertical=\"middle\" />"
-                    if score == '-1':
+                    if score.strip() == '-1':
                         score = "<Badge type=\"danger\" text=\"-1\" vertical=\"middle\" />"
 
                     mdFile.new_header(2, name + " " + score, style="atx")
