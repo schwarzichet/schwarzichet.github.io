@@ -49,7 +49,7 @@ for (const [key, value] of Object.entries(result)) {
 export default defineUserConfig<DefaultThemeOptions>({
     lang: 'en-US',
     title: 'ZJU Console',
-    description: 'Just playing around',
+    description: 'a document for ZJU Console',
     bundler: '@vuepress/vite',
 
     // theme: path.resolve(__dirname, 'theme'),
@@ -57,6 +57,7 @@ export default defineUserConfig<DefaultThemeOptions>({
         contributors: false,
         logo: '/images/zju_console.jpg',
         sidebar: result,
+        notFound: ['You Lost']
 
     },
 
@@ -68,4 +69,5 @@ export default defineUserConfig<DefaultThemeOptions>({
             },
         ],
     ],
+
 })
