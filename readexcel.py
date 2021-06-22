@@ -93,8 +93,18 @@ for gs in game_sheets:
 
                     mdFile.new_header(2, name + " " + score, style="atx")
 
+
+                    collapse_text = []
+                    if "剧透" in comment:
+                        collapse_text.append("剧透警告")
+                    
+
                     if len(comment) > 500:
-                        comment = "::: details 小作文警告\n" + comment + "\n:::\n"
+                        collapse_text.append("小作文警告")
+
+                    if len(collapse_text)!=0: 
+                        c_t = "&".join(collapse_text)
+                        comment = f"::: details {c_t}\n" + comment + "\n:::\n"
                         mdFile.write(comment)
                     else:
                         mdFile.new_paragraph(comment)
