@@ -10,7 +10,7 @@ const getDirContent = (source: fs.PathLike) =>
         .filter(entry => entry.name[0] != '.' && entry.name != 'README.md').sort((a, b) => parseInt(b.name) - parseInt(a.name)).map(entry => source + entry.name)
 
 const getMetaDataDate = (source) =>
-        new Date(parseMD(fs.readFileSync('docs'+source, 'utf8'))['metadata']['game_release_date'])
+    new Date(parseMD(fs.readFileSync('docs' + source, 'utf8'))['metadata']['game_release_date'])
 
 
 let allDir = glob.sync('docs/**/').map(f => '/' + f.substr(5));
