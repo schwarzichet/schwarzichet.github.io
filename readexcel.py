@@ -71,7 +71,8 @@ for gs in game_sheets:
                 else:
                     mdFile.new_line(i + ": no data~")
             else:
-                mdFile.new_line(i + ": no data~")
+                if i in meta_info[-2::]:
+                    mdFile.new_line(i + ": no data~")
 
         try:
             for i in game.iteritems():
