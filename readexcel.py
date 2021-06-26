@@ -1,60 +1,74 @@
-from os import sep
 from typing import List, Tuple, Any
-from numpy import NaN, remainder
 import pandas
-from mdutils.mdutils import MdUtils,MarkDownFile
+from mdutils.mdutils import MdUtils, MarkDownFile
 import markdown_strings
 import os
 from pathlib import Path
 import sys
 import re
 import yaml
+from pathvalidate import sanitize_filename
+
+
+def read_excel(file_path: str, sheet_name: str) -> List[Tuple[Any, pandas.Series]]:
+    excel_file = pandas.read_excel(file_path, sheet_name=sheet_name, engine="openpyxl")
+    entries: List[Tuple[Any, pandas.Series]] = list(excel_file.iterrows())
+    return entries
+
+
+def create_category_readme(category: str, content: str, header: str):
+    if not os.path.exists(f"docs/{category}/README.md"):
+        Path(f"docs/{category}/").mkdir(parents=True, exist_ok=True)
+        readme_mdFile = MdUtils(file_name=f"docs/{category}/README.md")
+        readme_mdFile.new_header(1, header)
+        readme_mdFile.new_line(content)
+        # readme_mdFile.new_line(f"This is for games.")
+        readme_mdFile.create_md_file()
+
+
+def create_year_folders(category: str):
+    if not os.path.exists(f"docs/{category}/" + str(year)):
+        Path(f"docs/{category}/" + str(year)).mkdir(parents=True, exist_ok=True)
+
+    if not os.path.exists(f"docs/{category}/" + str(year) + "/README.md"):
+        readme_mdFile = MdUtils(
+            file_name=f"docs/{category}/" + str(year) + "/README.md"
+        )
+        readme_mdFile.new_header(1, str(year))
+        readme_mdFile.new_line(f"This is for {year}'s {category}s.")
+        readme_mdFile.create_md_file()
+
+
+def check_filename(name: str) -> str:
+    return str(sanitize_filename(name)).replace("'", "quote").replace('"', "quote")
+
 
 game_sheets = ["2014-2000年", "2015-2021年", "古早作品"]
 
-
 for gs in game_sheets:
-    gamelife = pandas.read_excel(
-        "gamelife.xlsx",
-        sheet_name=gs,
-        engine="openpyxl",
-    )
 
-    games: List[Tuple[Any, pandas.Series]] = list(gamelife.iterrows())
+    games = read_excel("gamelife.xlsx", gs)
 
     for index, game in games:
-        # game = games[62][1]
 
         name: str = game["作品名"].strip()
         date: pandas.Timestamp = game["发售日"]
         year = date.year
-        print(name, year)
 
-        if not os.path.exists("docs/game/README.md"):
-            Path("docs/game/").mkdir(parents=True, exist_ok=True)
-            readme_mdFile = MdUtils(file_name="docs/game/README.md")
-            readme_mdFile.new_header(1, "Game")
-            readme_mdFile.new_line(f"This is for games.")
-            readme_mdFile.create_md_file()
+        create_category_readme("game", "This is for games.", "Game")
 
-        if not os.path.exists("docs/game/" + str(year)):
-            Path("docs/game/" + str(year)).mkdir(parents=True, exist_ok=True)
+        create_year_folders("game")
 
-        if not os.path.exists("docs/game/" + str(year) + "/README.md"):
-            readme_mdFile = MdUtils(file_name="docs/game/" + str(year) + "/README.md")
-            readme_mdFile.new_header(1, str(year))
-            readme_mdFile.new_line(f"This is for {year}'s games.")
-            readme_mdFile.create_md_file()
+        filename = check_filename(name)
 
-        if "/" in name:
-            name = name.replace("/", "forward slash")
-        if ":" in name:
-            name = name.replace(":", "Colon")
-
-        mdFile = MdUtils(file_name="docs/game/" + str(year) + "/" + name)
+        mdFile = MdUtils(file_name="docs/game/" + str(year) + "/" + filename)
         mdFile.title = ""
-        md_file  = MarkDownFile("docs/game/" + str(year) + "/" + name)
-        md_metadata = {"game_release_date": date.strftime("%Y-%m-%d") if not pandas.isna(date) else "unknown"}
+        # md_file = MarkDownFile("docs/game/" + str(year) + "/" + name)
+        md_metadata = {
+            "release_date": date.strftime("%Y-%m-%d")
+            if not pandas.isna(date)
+            else "unknown"
+        }
         mdFile.write("---\n")
         mdFile.write(yaml.dump(md_metadata))
         mdFile.write("---\n")
@@ -88,22 +102,20 @@ for gs in game_sheets:
                     )
 
                     if score.strip() == "+1":
-                        score = "<Badge type=\"tip\" text=\"+1\" vertical=\"middle\" />"
-                    if score.strip() == '-1':
-                        score = "<Badge type=\"danger\" text=\"-1\" vertical=\"middle\" />"
+                        score = '<Badge type="tip" text="+1" vertical="middle" />'
+                    if score.strip() == "-1":
+                        score = '<Badge type="danger" text="-1" vertical="middle" />'
 
                     mdFile.new_header(2, name + " " + score, style="atx")
-
 
                     collapse_text = []
                     if "剧透" in comment:
                         collapse_text.append("剧透警告")
-                    
 
                     if len(comment) > 500:
                         collapse_text.append("小作文警告")
 
-                    if len(collapse_text)!=0: 
+                    if len(collapse_text) != 0:
                         c_t = "&".join(collapse_text)
                         comment = f"::: details {c_t}\n" + comment + "\n:::\n"
                         mdFile.write(comment)
@@ -114,10 +126,107 @@ for gs in game_sheets:
             print(game)
             print(e)
             print(comment)
-            # print(comment.split(sep="；：", maxsplit=1))
-            # print(comment.rsplit(sep='；：', maxsplit=1))
             sys.exit()
 
+        mdFile.create_md_file()
 
-        print(mdFile.title, mdFile.table_of_contents)
+
+anime_sheets = [f"{x}番剧目录" for x in range(2010, 2022)]
+anime_sheets.append("上古番剧目录")
+
+for anime_sheet in anime_sheets:
+    animes = read_excel("anime.xlsx", anime_sheet)
+    for index, anime in animes:
+        if pandas.isna(anime["全称"]) or anime["全称"] == "其他":
+            continue
+
+        name: str = anime["全称"].strip()
+        if type(anime["放送时间"]) is float:
+            date: pandas.Timestamp = pandas.Timestamp(
+                year=int(anime["放送时间"]), month=1, day=1
+            )
+        else:
+            date: pandas.Timestamp = anime["放送时间"]
+        year = date.year
+
+        create_category_readme("anime", "This is for animes", "Anime")
+
+        create_year_folders("anime")
+
+        filename = check_filename(name)
+
+        mdFile = MdUtils(file_name="docs/anime/" + str(year) + "/" + filename)
+        mdFile.title = ""
+        # md_file = MarkDownFile("docs/anime/" + str(year) + "/" + name)
+        md_metadata = {
+            "release_date": date.strftime("%Y-%m")
+            if not pandas.isna(date)
+            else "unknown"
+        }
+        mdFile.write("---\n")
+        mdFile.write(yaml.dump(md_metadata))
+        mdFile.write("---\n")
+
+        mdFile.new_header(1, anime["全称"])
+
+        meta_info = ["TAG", "放送时间", "备注", "总评人数", "好评人数"]
+
+        for i in meta_info:
+            if i in anime.keys():
+                if not pandas.isna(anime[i]):
+                    if i == "放送时间":
+                        if anime_sheet == "上古番剧目录":
+                            mdFile.new_line(i + ": " + str(year))
+                        else:
+                            mdFile.new_line(i + ": " + str(date.strftime("%Y-%m")))
+                    else:
+                        mdFile.new_line(i + ": " + str(anime[i]))
+                else:
+                    mdFile.new_line(i + ": no data~")
+
+        try:
+            for i in anime.iteritems():
+                if i[0] not in meta_info and i[0] != "全称" and not pandas.isna(i[1]):
+                    comment: str = i[1]
+                    if not comment or comment.isspace():
+                        continue
+
+                    seps = list(re.finditer("；|：|;", comment))
+                    score, comment, name = (
+                        comment[: seps[0].start()],
+                        comment[seps[0].end() : seps[-1].start()],
+                        comment[seps[-1].end() :],
+                    )
+
+                    if score.strip() == "+1":
+                        score = '<Badge type="tip" text="+1" vertical="middle" />'
+                    if score.strip() == "+2":
+                        score = '<Badge type="tip" text="+2" vertical="middle" />'
+                    if score.strip() == "-1":
+                        score = '<Badge type="danger" text="-1" vertical="middle" />'
+                    if score.strip() == "0":
+                        score = '<Badge type="warning" text="0" vertical="middle" />'
+
+                    mdFile.new_header(2, name + " " + score, style="atx")
+
+                    collapse_text = []
+                    if "剧透" in comment:
+                        collapse_text.append("剧透警告")
+
+                    if len(comment) > 500:
+                        collapse_text.append("小作文警告")
+
+                    if len(collapse_text) != 0:
+                        c_t = "&".join(collapse_text)
+                        comment = f"::: details {c_t}\n" + comment + "\n:::\n"
+                        mdFile.write(comment)
+                    else:
+                        mdFile.new_paragraph(comment)
+
+        except Exception as e:
+            print(anime)
+            print(e)
+            print(comment)
+            sys.exit()
+
         mdFile.create_md_file()

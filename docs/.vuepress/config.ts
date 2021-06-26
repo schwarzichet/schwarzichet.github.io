@@ -10,7 +10,7 @@ const getDirContent = (source: fs.PathLike) =>
         .filter(entry => entry.name[0] != '.' && entry.name != 'README.md').sort((a, b) => parseInt(b.name) - parseInt(a.name)).map(entry => source + entry.name)
 
 const getMetaDataDate = (source) =>
-    new Date(parseMD(fs.readFileSync('docs' + source, 'utf8'))['metadata']['game_release_date'])
+    new Date(parseMD(fs.readFileSync('docs' + source, 'utf8'))['metadata']['release_date'])
 
 
 let allDir = glob.sync('docs/**/').map(f => '/' + f.substr(5));
@@ -32,11 +32,11 @@ allDir.forEach(i => {
 
 result['/'][0]['text'] = 'ZJU Console'
 result['/game/'][0]['text'] = 'Game'
+result['/anime/'][0]['text'] = 'Anime'
 
 for (const [key, value] of Object.entries(result)) {
     const temp = key.split('/').filter(i => i != '');
     if (temp.length == 2 && /^\d+$/.test(temp[temp.length - 1])) {
-        // console.log(result[key])
         result[key][0]['children'].sort((a: any, b: any) => getMetaDataDate(b) - getMetaDataDate(a))
         result[key].unshift(
             {
@@ -67,7 +67,8 @@ export default defineUserConfig<DefaultThemeOptions>({
             {
                 maxSuggestions: 100,
             },
-        ],
+
+        ]
     ],
 
 })
