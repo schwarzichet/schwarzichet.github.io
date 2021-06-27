@@ -59,7 +59,7 @@ def parse_comment(comment: str):
     if score.strip() == "0" or score.strip() == "+0":
         score = '<Badge type="warning" text="0" vertical="middle" />'
 
-    comment_header = name + " " + score
+    comment_header = score + " " + name
 
     collapse_text = []
     if "剧透" in comment:
