@@ -22,7 +22,6 @@ def create_category_readme(category: str, content: str, header: str):
         readme_mdFile = MdUtils(file_name=f"docs/{category}/README.md")
         readme_mdFile.new_header(1, header)
         readme_mdFile.new_line(content)
-        # readme_mdFile.new_line(f"This is for games.")
         readme_mdFile.create_md_file()
 
 
@@ -41,6 +40,41 @@ def create_year_folders(category: str):
 
 def check_filename(name: str) -> str:
     return str(sanitize_filename(name)).replace("'", "quote").replace('"', "quote")
+
+
+def parse_comment(comment: str):
+    seps = list(re.finditer("；|：|;", comment))
+    score, comment, name = (
+        comment[: seps[0].start()],
+        comment[seps[0].end() : seps[-1].start()],
+        comment[seps[-1].end() :],
+    )
+
+    if score.strip() == "+1":
+        score = '<Badge type="tip" text="+1" vertical="middle" />'
+    if score.strip() == "+2":
+        score = '<Badge type="tip" text="+2" vertical="middle" />'
+    if score.strip() == "-1":
+        score = '<Badge type="danger" text="-1" vertical="middle" />'
+    if score.strip() == "0" or score.strip() == "+0":
+        score = '<Badge type="warning" text="0" vertical="middle" />'
+
+    comment_header = name + " " + score
+
+    collapse_text = []
+    if "剧透" in comment:
+        collapse_text.append("剧透警告")
+
+    if len(comment) > 500:
+        collapse_text.append("小作文警告")
+
+    if len(collapse_text) != 0:
+        c_t = "&".join(collapse_text)
+        comment = f"::: details {c_t}\n" + comment + "\n:::\n"
+    else:
+        comment = "\n\n" + comment
+
+    return comment_header, comment
 
 
 game_sheets = ["2014-2000年", "2015-2021年", "古早作品"]
@@ -63,7 +97,6 @@ for gs in game_sheets:
 
         mdFile = MdUtils(file_name="docs/game/" + str(year) + "/" + filename)
         mdFile.title = ""
-        # md_file = MarkDownFile("docs/game/" + str(year) + "/" + name)
         md_metadata = {
             "release_date": date.strftime("%Y-%m-%d")
             if not pandas.isna(date)
@@ -94,33 +127,10 @@ for gs in game_sheets:
                     comment: str = i[1]
                     if not comment or comment.isspace():
                         continue
-                    seps = list(re.finditer("；|：|;", comment))
-                    score, comment, name = (
-                        comment[: seps[0].start()],
-                        comment[seps[0].end() : seps[-1].start()],
-                        comment[seps[-1].end() :],
-                    )
 
-                    if score.strip() == "+1":
-                        score = '<Badge type="tip" text="+1" vertical="middle" />'
-                    if score.strip() == "-1":
-                        score = '<Badge type="danger" text="-1" vertical="middle" />'
-
-                    mdFile.new_header(2, name + " " + score, style="atx")
-
-                    collapse_text = []
-                    if "剧透" in comment:
-                        collapse_text.append("剧透警告")
-
-                    if len(comment) > 500:
-                        collapse_text.append("小作文警告")
-
-                    if len(collapse_text) != 0:
-                        c_t = "&".join(collapse_text)
-                        comment = f"::: details {c_t}\n" + comment + "\n:::\n"
-                        mdFile.write(comment)
-                    else:
-                        mdFile.new_paragraph(comment)
+                    comment_header, comment = parse_comment(comment)
+                    mdFile.new_header(2, comment_header, style="atx")
+                    mdFile.write(comment)
 
         except Exception as e:
             print(game)
@@ -157,7 +167,6 @@ for anime_sheet in anime_sheets:
 
         mdFile = MdUtils(file_name="docs/anime/" + str(year) + "/" + filename)
         mdFile.title = ""
-        # md_file = MarkDownFile("docs/anime/" + str(year) + "/" + name)
         md_metadata = {
             "release_date": date.strftime("%Y-%m")
             if not pandas.isna(date)
@@ -190,41 +199,84 @@ for anime_sheet in anime_sheets:
                     comment: str = i[1]
                     if not comment or comment.isspace():
                         continue
-
-                    seps = list(re.finditer("；|：|;", comment))
-                    score, comment, name = (
-                        comment[: seps[0].start()],
-                        comment[seps[0].end() : seps[-1].start()],
-                        comment[seps[-1].end() :],
-                    )
-
-                    if score.strip() == "+1":
-                        score = '<Badge type="tip" text="+1" vertical="middle" />'
-                    if score.strip() == "+2":
-                        score = '<Badge type="tip" text="+2" vertical="middle" />'
-                    if score.strip() == "-1":
-                        score = '<Badge type="danger" text="-1" vertical="middle" />'
-                    if score.strip() == "0":
-                        score = '<Badge type="warning" text="0" vertical="middle" />'
-
-                    mdFile.new_header(2, name + " " + score, style="atx")
-
-                    collapse_text = []
-                    if "剧透" in comment:
-                        collapse_text.append("剧透警告")
-
-                    if len(comment) > 500:
-                        collapse_text.append("小作文警告")
-
-                    if len(collapse_text) != 0:
-                        c_t = "&".join(collapse_text)
-                        comment = f"::: details {c_t}\n" + comment + "\n:::\n"
-                        mdFile.write(comment)
-                    else:
-                        mdFile.new_paragraph(comment)
+                    comment_header, comment = parse_comment(comment)
+                    mdFile.new_header(2, comment_header, style="atx")
+                    mdFile.write(comment)
 
         except Exception as e:
             print(anime)
+            print(e)
+            print(comment)
+            sys.exit()
+
+        mdFile.create_md_file()
+
+tvfilm_sheets = ["影视剧", "电影"]
+
+for tvfilm_sheet in tvfilm_sheets:
+    tvfilms = read_excel("三次元影视评鉴.xlsx", tvfilm_sheet)
+    for index, tvfilm in tvfilms:
+        if pandas.isna(tvfilm["名称"]) and pandas.isna(tvfilm["原文名称"]):
+            continue
+
+        if pandas.isna(tvfilm["名称"]):
+            name: str = tvfilm["原文名称"].strip()
+        else:
+            name: str = tvfilm["名称"].strip()
+
+        if tvfilm_sheet == "影视剧":
+            date: pandas.Timestamp = tvfilm["播出时间"]
+            year = date.year
+        if tvfilm_sheet == "电影":
+            date: pandas.Timestamp = tvfilm["上映时间（世界首映）"]
+            year = date.year
+
+        create_category_readme("tvfilm", "This is for tv&films", "tv&film")
+
+        create_year_folders("tvfilm")
+
+        filename = check_filename(name)
+
+        mdFile = MdUtils(file_name="docs/tvfilm/" + str(year) + "/" + filename)
+        mdFile.title = ""
+        md_metadata = {
+            "release_date": date.strftime("%Y-%m-%d")
+            if not pandas.isna(date)
+            else "unknown"
+        }
+        mdFile.write("---\n")
+        mdFile.write(yaml.dump(md_metadata))
+        mdFile.write("---\n")
+
+        mdFile.new_header(1, name)
+
+        if tvfilm_sheet == "影视剧":
+            meta_info = ["原文名称", "tag", "播出时间", "结束时间", "备注", "总评人数", "好评人数"]
+        if tvfilm_sheet == "电影":
+            meta_info = ["原文名称", "tag", "上映时间（世界首映）", "导演", "备注", "总评人数", "好评人数"]
+
+        for i in meta_info:
+            if i in tvfilm.keys():
+                if not pandas.isna(tvfilm[i]):
+                    if i == "播出时间" or i == "结束时间" or i == "上映时间（世界首映）":
+                        mdFile.new_line(i + ": " + str(date.strftime("%Y-%m-%d")))
+                    else:
+                        mdFile.new_line(i + ": " + str(tvfilm[i]))
+                else:
+                    mdFile.new_line(i + ": no data~")
+
+        try:
+            for i in tvfilm.iteritems():
+                if i[0] not in meta_info and i[0] != "名称" and not pandas.isna(i[1]):
+                    comment: str = i[1]
+                    if not comment or comment.isspace():
+                        continue
+                    comment_header, comment = parse_comment(comment)
+                    mdFile.new_header(2, comment_header, style="atx")
+                    mdFile.write(comment)
+
+        except Exception as e:
+            print(tvfilm)
             print(e)
             print(comment)
             sys.exit()
