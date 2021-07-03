@@ -2,14 +2,13 @@ import { defineUserConfig } from 'vuepress'
 import type { DefaultThemeOptions } from 'vuepress'
 import fs from 'fs';
 import glob from 'glob';
-import path from 'path'
 const parseMD = require('parse-md').default
 
 const getDirContent = (source: fs.PathLike) =>
     fs.readdirSync(source, { withFileTypes: true })
         .filter(entry => entry.name[0] != '.' && entry.name != 'README.md').sort((a, b) => parseInt(b.name) - parseInt(a.name)).map(entry => source + entry.name)
 
-const getMetaDataDate = (source) =>
+const getMetaDataDate = (source: Date) =>
     new Date(parseMD(fs.readFileSync('docs' + source, 'utf8'))['metadata']['release_date'])
 
 
@@ -17,7 +16,6 @@ let allDir = glob.sync('docs/**/').map(f => '/' + f.substr(5));
 var result = {}
 allDir.forEach(i => {
     result[i] = [{
-        isGroup: true,
         text: i.split('/').slice(-2)[0],
         children: getDirContent('docs' + i).map(entryName => {
             if (!entryName.endsWith('.md')) {
@@ -37,7 +35,7 @@ result['/anime/'][0]['text'] = 'Anime'
 for (const [key, value] of Object.entries(result)) {
     const temp = key.split('/').filter(i => i != '');
     if (temp.length == 2 && /^\d+$/.test(temp[temp.length - 1])) {
-        result[key][0]['children'].sort((a: any, b: any) => getMetaDataDate(b) - getMetaDataDate(a))
+        result[key][0]['children'].sort((a: any, b: any) => getMetaDataDate(b).getTime() - getMetaDataDate(a).getTime())
         result[key].unshift(
             {
                 text: "Back",
@@ -57,7 +55,8 @@ export default defineUserConfig<DefaultThemeOptions>({
         contributors: false,
         logo: '/images/zju_console.jpg',
         sidebar: result,
-        notFound: ['You Lost']
+        notFound: ['You Lost'],
+        lastUpdated: false
 
     },
 
