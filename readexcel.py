@@ -1,10 +1,9 @@
 from typing import List, Tuple, Any
 import pandas
-from mdutils.mdutils import MdUtils, MarkDownFile
+from mdutils.mdutils import MdUtils
 import markdown_strings
 import os
 from pathlib import Path
-import sys
 import re
 import yaml
 from pathvalidate import sanitize_filename
@@ -74,7 +73,35 @@ def parse_comment(comment: str):
     else:
         comment = "\n\n" + comment
 
-    return comment_header, comment
+    return score, comment_header, comment
+
+
+def write_metadata(mdFile, date: pandas.Timestamp, date_format: str):
+    md_metadata = {
+        "release_date": date.strftime(date_format)
+        if not pandas.isna(date)
+        else "unknown"
+    }
+    mdFile.write("---\n")
+    mdFile.write(yaml.dump(md_metadata))
+    mdFile.write("---\n")
+
+
+def get_comments(enity, meta_info_list: List[str]):
+    comments = []
+    up_review = 0
+    for i in enity.iteritems():
+        if i[0] not in meta_info_list and not pandas.isna(i[1]):
+            comment: str = i[1]
+            if not comment or comment.isspace():
+                continue
+
+            score, comment_header, comment = parse_comment(comment)
+            comments.append((comment_header, comment))
+            if "+" in score:
+                up_review += 1
+
+    return up_review, comments
 
 
 def make_game():
@@ -88,68 +115,46 @@ def make_game():
             year = date.year
 
             create_category_readme("game", "This is for games.", "Game")
-
             create_year_folders("game", year)
 
             filename = check_filename(name)
-
             mdFile = MdUtils(file_name="docs/game/" + str(year) + "/" + filename)
             mdFile.title = ""
-            md_metadata = {
-                "release_date": date.strftime("%Y-%m-%d")
-                if not pandas.isna(date)
-                else "unknown"
-            }
-            mdFile.write("---\n")
-            mdFile.write(yaml.dump(md_metadata))
-            mdFile.write("---\n")
+
+            write_metadata(mdFile, date, "%Y-%m-%d")
 
             mdFile.new_header(1, game["作品名"])
+            mdFile.new_line(
+                "TAG" + ": " + "no data~"
+                if pandas.isna(game["TAG"])
+                else str(game["TAG"])
+            )
+            mdFile.new_line(
+                "发售日" + ": " + "no data~"
+                if pandas.isna(game["发售日"])
+                else str(game["发售日"].strftime("%Y-%m-%d"))
+            )
+            mdFile.new_line(
+                "备注" + ": " + "no data~" if pandas.isna(game["备注"]) else str(game["备注"])
+            )
+
             meta_info = ["TAG", "发售日", "备注", "总评人数", "好评人数"]
-            for i in meta_info:
-                if i in game.keys():
-                    if not pandas.isna(game[i]):
-                        if i == "发售日":
-                            mdFile.new_line(
-                                i + ": " + str(game[i].strftime("%Y-%m-%d"))
-                            )
-                        else:
-                            mdFile.new_line(i + ": " + str(game[i]))
-                    else:
-                        mdFile.new_line(i + ": no data~")
-                else:
-                    if i in meta_info[-2::]:
-                        mdFile.new_line(i + ": no data~")
+            meta_info.append("作品名")
+            up_review, comments = get_comments(game, meta_info)
 
-            try:
-                for i in game.iteritems():
-                    if (
-                        i[0] not in meta_info
-                        and i[0] != "作品名"
-                        and not pandas.isna(i[1])
-                    ):
-                        comment: str = i[1]
-                        if not comment or comment.isspace():
-                            continue
+            mdFile.new_line("总评人数" + ": " + str(len(comments)))
+            mdFile.new_line("好评人数" + ": " + str(up_review))
 
-                        comment_header, comment = parse_comment(comment)
-                        mdFile.new_header(2, comment_header, style="atx")
-                        mdFile.write(comment)
-
-            except Exception as e:
-                print(game)
-                print(e)
-                print(comment)
-                sys.exit()
+            for comment_header, comment in comments:
+                mdFile.new_header(2, comment_header, style="atx")
+                mdFile.write(comment)
 
             mdFile.create_md_file()
 
 
 def make_anime():
-
     anime_sheets = [f"{x}番剧目录" for x in range(2010, 2022)]
     anime_sheets.append("上古番剧目录")
-
     for anime_sheet in anime_sheets:
         animes = read_excel("番剧茶话会.xlsx", anime_sheet)
         for index, anime in animes:
@@ -166,26 +171,17 @@ def make_anime():
             year = date.year
 
             create_category_readme("anime", "This is for animes", "Anime")
-
             create_year_folders("anime", year)
 
             filename = check_filename(name)
-
             mdFile = MdUtils(file_name="docs/anime/" + str(year) + "/" + filename)
             mdFile.title = ""
-            md_metadata = {
-                "release_date": date.strftime("%Y-%m")
-                if not pandas.isna(date)
-                else "unknown"
-            }
-            mdFile.write("---\n")
-            mdFile.write(yaml.dump(md_metadata))
-            mdFile.write("---\n")
+
+            write_metadata(mdFile, date, "%Y-%m")
 
             mdFile.new_header(1, anime["全称"])
 
-            meta_info = ["TAG", "放送时间", "备注", "总评人数", "好评人数"]
-
+            meta_info = ["TAG", "放送时间", "备注"]
             for i in meta_info:
                 if i in anime.keys():
                     if not pandas.isna(anime[i]):
@@ -199,21 +195,15 @@ def make_anime():
                     else:
                         mdFile.new_line(i + ": no data~")
 
-            try:
-                for i in anime.iteritems():
-                    if i[0] not in meta_info and i[0] != "全称" and not pandas.isna(i[1]):
-                        comment: str = i[1]
-                        if not comment or comment.isspace():
-                            continue
-                        comment_header, comment = parse_comment(comment)
-                        mdFile.new_header(2, comment_header, style="atx")
-                        mdFile.write(comment)
+            meta_info.append("全称")
+            up_review, comments = get_comments(anime, meta_info)
 
-            except Exception as e:
-                print(anime)
-                print(e)
-                print(comment)
-                sys.exit()
+            mdFile.new_line("总评人数" + ": " + str(len(comments)))
+            mdFile.new_line("好评人数" + ": " + str(up_review))
+
+            for comment_header, comment in comments:
+                mdFile.new_header(2, comment_header, style="atx")
+                mdFile.write(comment)
 
             mdFile.create_md_file()
 
@@ -239,29 +229,20 @@ def make_tvfilm():
                 year = date.year
 
             create_category_readme("tvfilm", "This is for tv&films", "tv&film")
-
             create_year_folders("tvfilm", year)
 
             filename = check_filename(name)
-
             mdFile = MdUtils(file_name="docs/tvfilm/" + str(year) + "/" + filename)
             mdFile.title = ""
-            md_metadata = {
-                "release_date": date.strftime("%Y-%m-%d")
-                if not pandas.isna(date)
-                else "unknown"
-            }
-            mdFile.write("---\n")
-            mdFile.write(yaml.dump(md_metadata))
-            mdFile.write("---\n")
+
+            write_metadata(mdFile, date, "%Y-%m-%d")
 
             mdFile.new_header(1, name)
 
             if tvfilm_sheet == "影视剧":
-                meta_info = ["原文名称", "tag", "播出时间", "结束时间", "备注", "总评人数", "好评人数"]
+                meta_info = ["原文名称", "tag", "播出时间", "结束时间", "备注"]
             if tvfilm_sheet == "电影":
-                meta_info = ["原文名称", "tag", "上映时间（世界首映）", "导演", "备注", "总评人数", "好评人数"]
-
+                meta_info = ["原文名称", "tag", "上映时间（世界首映）", "导演", "备注"]
             for i in meta_info:
                 if i in tvfilm.keys():
                     if not pandas.isna(tvfilm[i]):
@@ -272,21 +253,15 @@ def make_tvfilm():
                     else:
                         mdFile.new_line(i + ": no data~")
 
-            try:
-                for i in tvfilm.iteritems():
-                    if i[0] not in meta_info and i[0] != "名称" and not pandas.isna(i[1]):
-                        comment: str = i[1]
-                        if not comment or comment.isspace():
-                            continue
-                        comment_header, comment = parse_comment(comment)
-                        mdFile.new_header(2, comment_header, style="atx")
-                        mdFile.write(comment)
+            meta_info.append("名称")
+            up_review, comments = get_comments(tvfilm, meta_info)
 
-            except Exception as e:
-                print(tvfilm)
-                print(e)
-                print(comment)
-                sys.exit()
+            mdFile.new_line("总评人数" + ": " + str(len(comments)))
+            mdFile.new_line("好评人数" + ": " + str(up_review))
+
+            for comment_header, comment in comments:
+                mdFile.new_header(2, comment_header, style="atx")
+                mdFile.write(comment)
 
             mdFile.create_md_file()
 
