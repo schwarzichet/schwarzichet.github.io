@@ -125,18 +125,19 @@ def make_game():
 
             mdFile.new_header(1, game["作品名"])
             mdFile.new_line(
-                "TAG" + ": " + "no data~"
+                "TAG" + ": " + ("no data~"
                 if pandas.isna(game["TAG"])
-                else str(game["TAG"])
+                else str(game["TAG"]))
             )
             mdFile.new_line(
-                "发售日" + ": " + "no data~"
+                "发售日" + ": " + ("To be released"
                 if pandas.isna(game["发售日"])
-                else str(game["发售日"].strftime("%Y-%m-%d"))
+                else str(game["发售日"].strftime("%Y-%m-%d")))
             )
-            mdFile.new_line(
-                "备注" + ": " + "no data~" if pandas.isna(game["备注"]) else str(game["备注"])
-            )
+            if not pandas.isna(game["备注"]):
+                mdFile.new_line(
+                "备注" + ": " + str(game["备注"])
+                )
 
             meta_info = ["TAG", "发售日", "备注", "总评人数", "好评人数"]
             meta_info.append("作品名")
