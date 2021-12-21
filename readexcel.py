@@ -105,7 +105,7 @@ def get_comments(enity, meta_info_list: List[str]):
 
 
 def make_game():
-    game_sheets = ["2014-2000年", "2015-2021年", "古早作品"]
+    game_sheets = ["2014-2000年", "2015-2019年","2020-2022年", "古早作品"]
     for gs in game_sheets:
         games = read_excel("游戏人生.xlsx", gs)
         for index, game in games:
