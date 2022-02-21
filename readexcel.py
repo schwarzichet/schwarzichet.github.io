@@ -1,7 +1,6 @@
 from typing import List, Tuple, Any
 import pandas
 from mdutils.mdutils import MdUtils
-import markdown_strings
 import os
 from pathlib import Path
 import re
