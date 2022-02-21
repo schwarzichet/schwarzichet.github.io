@@ -12,16 +12,16 @@ const getMetaDataDate = (source: Date) =>
     new Date(parseMD(fs.readFileSync('docs' + source, 'utf8'))['metadata']['release_date'])
 
 
-let allDir = glob.sync('docs/**/').map(f => '/' + f.substr(5));
+let allDir = glob.sync('docs/**/').map(f => '/' + f.substring(5));
 var result = {}
 allDir.forEach(i => {
     result[i] = [{
         text: i.split('/').slice(-2)[0],
         children: getDirContent('docs' + i).map(entryName => {
             if (!entryName.endsWith('.md')) {
-                return entryName.substr(4) + '/'
+                return entryName.substring(4) + '/'
             } else {
-                return entryName.substr(4)
+                return entryName.substring(4)
             }
         }),
         link: i
