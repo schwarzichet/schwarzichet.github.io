@@ -1,0 +1,1 @@
+const e={key:"v-95730fdc",path:"/anime/2010/Redline.html",title:"Redline",lang:"en-US",frontmatter:{release_date:"2010-10"},excerpt:"",headers:[{level:2,title:"\u6C34\u955C",slug:"\u6C34\u955C",children:[]},{level:2,title:"\u9524",slug:"\u9524",children:[]}],filePathRelative:"anime/2010/Redline.md"};export{e as data};

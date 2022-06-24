@@ -1,0 +1,1 @@
+const e={key:"v-1913c216",path:"/tvfilm/2009/%E5%82%B2%E9%AA%A8%E8%B4%A4%E5%A6%BB.html",title:"\u50B2\u9AA8\u8D24\u59BB",lang:"en-US",frontmatter:{release_date:"2009-09-22"},excerpt:"",headers:[],filePathRelative:"tvfilm/2009/\u50B2\u9AA8\u8D24\u59BB.md"};export{e as data};

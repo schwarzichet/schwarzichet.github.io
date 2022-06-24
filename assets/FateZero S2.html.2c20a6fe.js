@@ -1,0 +1,1 @@
+const e={key:"v-c3b063f2",path:"/anime/2012/FateZero%20S2.html",title:"Fate/Zero S2",lang:"en-US",frontmatter:{release_date:"2012-04"},excerpt:"",headers:[{level:2,title:"bjzx",slug:"bjzx",children:[]},{level:2,title:"\u672C\u5B50",slug:"\u672C\u5B50",children:[]}],filePathRelative:"anime/2012/FateZero S2.md"};export{e as data};

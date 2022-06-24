@@ -1,0 +1,1 @@
+const e={key:"v-16c7bf64",path:"/game/2015/Undertale.html",title:"Undertale",lang:"en-US",frontmatter:{release_date:"2015-05-16"},excerpt:"",headers:[{level:2,title:"emiya",slug:"emiya",children:[]},{level:2,title:"ie",slug:"ie",children:[]}],filePathRelative:"game/2015/Undertale.md"};export{e as data};

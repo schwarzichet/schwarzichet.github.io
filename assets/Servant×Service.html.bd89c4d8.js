@@ -1,0 +1,1 @@
+const e={key:"v-6a20c070",path:"/anime/2013/Servant%C3%97Service.html",title:"Servant\xD7Service",lang:"en-US",frontmatter:{release_date:"2013-07"},excerpt:"",headers:[{level:2,title:"\u9524",slug:"\u9524",children:[]},{level:2,title:"dash",slug:"dash",children:[]}],filePathRelative:"anime/2013/Servant\xD7Service.md"};export{e as data};

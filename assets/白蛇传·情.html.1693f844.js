@@ -1,0 +1,1 @@
+const e={key:"v-ec2ea8ca",path:"/tvfilm/2019/%E7%99%BD%E8%9B%87%E4%BC%A0%C2%B7%E6%83%85.html",title:"\u767D\u86C7\u4F20\xB7\u60C5",lang:"en-US",frontmatter:{release_date:"2019-10-08"},excerpt:"",headers:[{level:2,title:"\u72EC\u5BFB\u8005",slug:"\u72EC\u5BFB\u8005",children:[]}],filePathRelative:"tvfilm/2019/\u767D\u86C7\u4F20\xB7\u60C5.md"};export{e as data};

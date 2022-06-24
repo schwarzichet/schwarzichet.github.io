@@ -1,0 +1,1 @@
+const e={key:"v-64cabadc",path:"/anime/2012/%E9%92%93%E7%90%83.html",title:"\u9493\u7403",lang:"en-US",frontmatter:{release_date:"2012-04"},excerpt:"",headers:[{level:2,title:"\u9524",slug:"\u9524",children:[]}],filePathRelative:"anime/2012/\u9493\u7403.md"};export{e as data};

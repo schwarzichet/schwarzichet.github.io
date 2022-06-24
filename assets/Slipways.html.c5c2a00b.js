@@ -1,0 +1,1 @@
+const e={key:"v-55dd8727",path:"/game/2021/Slipways.html",title:"Slipways",lang:"en-US",frontmatter:{release_date:"2021-06-03"},excerpt:"",headers:[{level:2,title:"17",slug:"_17",children:[]},{level:2,title:"\u9524",slug:"\u9524",children:[]}],filePathRelative:"game/2021/Slipways.md"};export{e as data};

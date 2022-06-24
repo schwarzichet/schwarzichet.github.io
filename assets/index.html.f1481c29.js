@@ -1,0 +1,1 @@
+const e={key:"v-8daa1a0e",path:"/",title:"ZJU Console Gamer",lang:"en-US",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u7ECF\u5E38\u4F1A\u88AB\u95EE\u5230\u7684\u95EE\u9898",slug:"\u7ECF\u5E38\u4F1A\u88AB\u95EE\u5230\u7684\u95EE\u9898",children:[]}],filePathRelative:"README.md"};export{e as data};

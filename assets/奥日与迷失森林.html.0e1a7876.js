@@ -1,0 +1,1 @@
+const e={key:"v-23015446",path:"/game/2015/%E5%A5%A5%E6%97%A5%E4%B8%8E%E8%BF%B7%E5%A4%B1%E6%A3%AE%E6%9E%97.html",title:"\u5965\u65E5\u4E0E\u8FF7\u5931\u68EE\u6797",lang:"en-US",frontmatter:{release_date:"2015-03-11"},excerpt:"",headers:[],filePathRelative:"game/2015/\u5965\u65E5\u4E0E\u8FF7\u5931\u68EE\u6797.md"};export{e as data};

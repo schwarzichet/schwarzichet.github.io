@@ -1,0 +1,1 @@
+const e={key:"v-35b6b3cf",path:"/game/2018/Nintendo%20Labo.html",title:"Nintendo Labo",lang:"en-US",frontmatter:{release_date:"2018-04-20"},excerpt:"",headers:[{level:2,title:"\u8BD5\u5242",slug:"\u8BD5\u5242",children:[]}],filePathRelative:"game/2018/Nintendo Labo.md"};export{e as data};

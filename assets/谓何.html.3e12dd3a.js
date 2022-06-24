@@ -1,0 +1,1 @@
+const e={key:"v-b0491580",path:"/game/2020/%E8%B0%93%E4%BD%95.html",title:"\u8C13\u4F55",lang:"en-US",frontmatter:{release_date:"2020-08-27"},excerpt:"",headers:[{level:2,title:"db",slug:"db",children:[]}],filePathRelative:"game/2020/\u8C13\u4F55.md"};export{e as data};

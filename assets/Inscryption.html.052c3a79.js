@@ -1,0 +1,1 @@
+const e={key:"v-0ac4e342",path:"/game/2021/Inscryption.html",title:"Inscryption",lang:"en-US",frontmatter:{release_date:"2021-10-15"},excerpt:"",headers:[{level:2,title:"emiya",slug:"emiya",children:[]}],filePathRelative:"game/2021/Inscryption.md"};export{e as data};

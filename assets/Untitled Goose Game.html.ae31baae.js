@@ -1,0 +1,1 @@
+const e={key:"v-8b660d38",path:"/game/2019/Untitled%20Goose%20Game.html",title:"Untitled Goose Game",lang:"en-US",frontmatter:{release_date:"2019-09-20"},excerpt:"",headers:[{level:2,title:"xxd",slug:"xxd",children:[]}],filePathRelative:"game/2019/Untitled Goose Game.md"};export{e as data};
