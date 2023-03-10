@@ -63,7 +63,7 @@ def parse_comment(comment: str):
     if "剧透" in comment:
         collapse_text.append("剧透警告")
 
-    if len(comment) > 500:
+    if len(comment) > 400:
         collapse_text.append("小作文警告")
 
     if len(collapse_text) != 0:
@@ -104,7 +104,7 @@ def get_comments(enity, meta_info_list: List[str]):
 
 
 def make_game():
-    game_sheets = ["2014-2000年", "2015-2019年","2020-2022年", "古早作品"]
+    game_sheets = ["2014-2000年", "2015-2019年","2020-2023年", "古早作品"]
     for gs in game_sheets:
         games = read_excel("电动力学.xlsx", gs)
         for index, game in games:
@@ -153,7 +153,7 @@ def make_game():
 
 
 def make_anime():
-    anime_sheets = [f"{x}番剧目录" for x in range(2010, 2022)]
+    anime_sheets = [f"{x}番剧目录" for x in range(2010, 2024)]
     anime_sheets.append("上古番剧目录")
     for anime_sheet in anime_sheets:
         animes = read_excel("番剧茶话会.xlsx", anime_sheet)
