@@ -39,7 +39,7 @@ jobs:
           python readexcel.py
       
       - name: Setup Node.js
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v3
         with:
           # choose node.js version to use
           node-version: '16'
