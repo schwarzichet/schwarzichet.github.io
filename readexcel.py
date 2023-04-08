@@ -86,10 +86,10 @@ def write_metadata(mdFile, date: pandas.Timestamp, date_format: str):
     mdFile.write("---\n")
 
 
-def get_comments(enity, meta_info_list: List[str]):
+def get_comments(entry, meta_info_list: List[str]):
     comments = []
     up_review = 0
-    for i in enity.iteritems():
+    for i in entry.items():
         if i[0] not in meta_info_list and not pandas.isna(i[1]):
             comment: str = i[1]
             if not comment or comment.isspace():
