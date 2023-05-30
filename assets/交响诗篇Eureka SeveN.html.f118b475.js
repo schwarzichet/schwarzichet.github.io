@@ -1,0 +1,1 @@
+const e={key:"v-c7d09042",path:"/anime/2005/%E4%BA%A4%E5%93%8D%E8%AF%97%E7%AF%87Eureka%20SeveN.html",title:"\u4EA4\u54CD\u8BD7\u7BC7Eureka SeveN",lang:"en-US",frontmatter:{release_date:"2005-01"},excerpt:"",headers:[{level:2,title:"\u672C\u5B50",slug:"\u672C\u5B50",children:[]}],filePathRelative:"anime/2005/\u4EA4\u54CD\u8BD7\u7BC7Eureka SeveN.md"};export{e as data};

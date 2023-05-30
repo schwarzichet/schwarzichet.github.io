@@ -1,0 +1,1 @@
+const e={key:"v-346dfcf4",path:"/game/2010/Vanquish.html",title:"Vanquish",lang:"en-US",frontmatter:{release_date:"2010-10-19"},excerpt:"",headers:[{level:2,title:"17",slug:"_17",children:[]}],filePathRelative:"game/2010/Vanquish.md"};export{e as data};

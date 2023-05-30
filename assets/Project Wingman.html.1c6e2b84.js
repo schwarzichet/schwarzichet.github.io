@@ -1,0 +1,1 @@
+const e={key:"v-00ebd37a",path:"/game/2020/Project%20Wingman.html",title:"Project Wingman",lang:"en-US",frontmatter:{release_date:"2020-12-02"},excerpt:"",headers:[{level:2,title:"xxd",slug:"xxd",children:[]}],filePathRelative:"game/2020/Project Wingman.md"};export{e as data};

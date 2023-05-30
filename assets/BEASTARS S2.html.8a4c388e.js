@@ -1,0 +1,1 @@
+const e={key:"v-f022d890",path:"/anime/2021/BEASTARS%20S2.html",title:"BEASTARS S2",lang:"en-US",frontmatter:{release_date:"2021-01"},excerpt:"",headers:[{level:2,title:"ie",slug:"ie",children:[]},{level:2,title:"\u9524",slug:"\u9524",children:[]}],filePathRelative:"anime/2021/BEASTARS S2.md"};export{e as data};

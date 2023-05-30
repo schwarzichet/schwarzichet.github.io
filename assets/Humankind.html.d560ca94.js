@@ -1,0 +1,1 @@
+const e={key:"v-7fbb7506",path:"/game/2021/Humankind.html",title:"Humankind",lang:"en-US",frontmatter:{release_date:"2021-08-18"},excerpt:"",headers:[{level:2,title:"17",slug:"_17",children:[]},{level:2,title:"xgs",slug:"xgs",children:[]}],filePathRelative:"game/2021/Humankind.md"};export{e as data};

@@ -1,0 +1,1 @@
+const e={key:"v-4dfa7fc7",path:"/anime/2005/AIR.html",title:"AIR",lang:"en-US",frontmatter:{release_date:"2005-01"},excerpt:"",headers:[{level:2,title:"\u672C\u5B50",slug:"\u672C\u5B50",children:[]}],filePathRelative:"anime/2005/AIR.md"};export{e as data};

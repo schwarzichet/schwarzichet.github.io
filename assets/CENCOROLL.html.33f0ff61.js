@@ -1,0 +1,1 @@
+const e={key:"v-2f1f658e",path:"/anime/2019/CENCOROLL.html",title:"CENCOROLL",lang:"en-US",frontmatter:{release_date:"2019-04"},excerpt:"",headers:[{level:2,title:"\u9524",slug:"\u9524",children:[]},{level:2,title:"17",slug:"_17",children:[]}],filePathRelative:"anime/2019/CENCOROLL.md"};export{e as data};

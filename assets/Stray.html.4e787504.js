@@ -1,0 +1,1 @@
+const e={key:"v-3bd99e7d",path:"/game/2022/Stray.html",title:"Stray",lang:"en-US",frontmatter:{release_date:"2022-07-19"},excerpt:"",headers:[{level:2,title:"yzgg",slug:"yzgg",children:[]},{level:2,title:"17",slug:"_17",children:[]}],filePathRelative:"game/2022/Stray.md"};export{e as data};

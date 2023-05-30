@@ -1,0 +1,1 @@
+const e={key:"v-4b25dff4",path:"/anime/2007/CLANNAD.html",title:"CLANNAD",lang:"en-US",frontmatter:{release_date:"2007-01"},excerpt:"",headers:[{level:2,title:"ie",slug:"ie",children:[]},{level:2,title:"bjzx",slug:"bjzx",children:[]},{level:2,title:"dash",slug:"dash",children:[]}],filePathRelative:"anime/2007/CLANNAD.md"};export{e as data};

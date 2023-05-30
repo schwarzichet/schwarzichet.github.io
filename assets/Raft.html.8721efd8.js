@@ -1,0 +1,1 @@
+const e={key:"v-28020bef",path:"/game/2022/Raft.html",title:"Raft",lang:"en-US",frontmatter:{release_date:"2022-06-21"},excerpt:"",headers:[{level:2,title:"\u6C34\u955C",slug:"\u6C34\u955C",children:[]},{level:2,title:"xxd",slug:"xxd",children:[]},{level:2,title:"xgs",slug:"xgs",children:[]}],filePathRelative:"game/2022/Raft.md"};export{e as data};

@@ -1,0 +1,1 @@
+const e={key:"v-8f24f06a",path:"/game/2019/%E6%88%98%E4%BA%89%E6%9C%BA%E5%99%A85.html",title:"\u6218\u4E89\u673A\u56685",lang:"en-US",frontmatter:{release_date:"2019-09-06"},excerpt:"",headers:[{level:2,title:"17",slug:"_17",children:[]}],filePathRelative:"game/2019/\u6218\u4E89\u673A\u56685.md"};export{e as data};

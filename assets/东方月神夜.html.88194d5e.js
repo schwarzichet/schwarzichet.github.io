@@ -1,0 +1,1 @@
+const e={key:"v-bd370906",path:"/game/2019/%E4%B8%9C%E6%96%B9%E6%9C%88%E7%A5%9E%E5%A4%9C.html",title:"\u4E1C\u65B9\u6708\u795E\u591C",lang:"en-US",frontmatter:{release_date:"2019-02-26"},excerpt:"",headers:[{level:2,title:"emiya",slug:"emiya",children:[]}],filePathRelative:"game/2019/\u4E1C\u65B9\u6708\u795E\u591C.md"};export{e as data};

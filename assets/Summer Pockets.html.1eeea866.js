@@ -1,0 +1,1 @@
+const e={key:"v-4024deea",path:"/game/2018/Summer%20Pockets.html",title:"Summer Pockets",lang:"en-US",frontmatter:{release_date:"2018-06-29"},excerpt:"",headers:[{level:2,title:"\u8001\u738B",slug:"\u8001\u738B",children:[]}],filePathRelative:"game/2018/Summer Pockets.md"};export{e as data};

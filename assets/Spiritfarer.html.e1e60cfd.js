@@ -1,0 +1,1 @@
+const e={key:"v-78e14796",path:"/game/2020/Spiritfarer.html",title:"Spiritfarer",lang:"en-US",frontmatter:{release_date:"2020-08-18"},excerpt:"",headers:[{level:2,title:"xgs",slug:"xgs",children:[]},{level:2,title:"emiya",slug:"emiya",children:[]},{level:2,title:"bp",slug:"bp",children:[]}],filePathRelative:"game/2020/Spiritfarer.md"};export{e as data};

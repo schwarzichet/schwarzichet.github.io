@@ -1,0 +1,1 @@
+const e={key:"v-9af0f7ce",path:"/anime/2018/banana%20fish.html",title:"banana fish",lang:"en-US",frontmatter:{release_date:"2018-07"},excerpt:"",headers:[{level:2,title:"\u6C34\u955C",slug:"\u6C34\u955C",children:[]}],filePathRelative:"anime/2018/banana fish.md"};export{e as data};

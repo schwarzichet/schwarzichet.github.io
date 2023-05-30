@@ -1,0 +1,1 @@
+const e={key:"v-6f1b161e",path:"/game/2020/Cloudpunk.html",title:"Cloudpunk",lang:"en-US",frontmatter:{release_date:"2020-04-24"},excerpt:"",headers:[{level:2,title:"xgs",slug:"xgs",children:[]}],filePathRelative:"game/2020/Cloudpunk.md"};export{e as data};

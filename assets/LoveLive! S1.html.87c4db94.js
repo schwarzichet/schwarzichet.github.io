@@ -1,0 +1,1 @@
+const e={key:"v-7e51fa20",path:"/anime/2013/LoveLive!%20S1.html",title:"LoveLive! S1",lang:"en-US",frontmatter:{release_date:"2013-01"},excerpt:"",headers:[{level:2,title:"dash",slug:"dash",children:[]}],filePathRelative:"anime/2013/LoveLive! S1.md"};export{e as data};

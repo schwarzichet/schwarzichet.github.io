@@ -1,0 +1,1 @@
+const e={key:"v-7604c84c",path:"/game/2023/Forspoken.html",title:"Forspoken",lang:"en-US",frontmatter:{release_date:"2023-01-24"},excerpt:"",headers:[{level:2,title:"db",slug:"db",children:[]}],filePathRelative:"game/2023/Forspoken.md"};export{e as data};

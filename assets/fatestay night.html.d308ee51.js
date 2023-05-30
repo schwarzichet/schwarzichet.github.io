@@ -1,0 +1,1 @@
+const e={key:"v-295c92e8",path:"/anime/2006/fatestay%20night.html",title:"fate/stay night",lang:"en-US",frontmatter:{release_date:"2006-01"},excerpt:"",headers:[{level:2,title:"\u672C\u5B50",slug:"\u672C\u5B50",children:[]},{level:2,title:"\u9524",slug:"\u9524",children:[]}],filePathRelative:"anime/2006/fatestay night.md"};export{e as data};

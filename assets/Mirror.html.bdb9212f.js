@@ -1,0 +1,1 @@
+const e={key:"v-3dd30954",path:"/game/2018/Mirror.html",title:"Mirror",lang:"en-US",frontmatter:{release_date:"2018-04-19"},excerpt:"",headers:[{level:2,title:"\u9524",slug:"\u9524",children:[]},{level:2,title:"xxd",slug:"xxd",children:[]}],filePathRelative:"game/2018/Mirror.md"};export{e as data};

@@ -1,0 +1,1 @@
+const e={key:"v-2d292c0d",path:"/anime/2017/NEW%20GAME!!.html",title:"NEW GAME!!",lang:"en-US",frontmatter:{release_date:"2017-09"},excerpt:"",headers:[{level:2,title:"xgs",slug:"xgs",children:[]}],filePathRelative:"anime/2017/NEW GAME!!.md"};export{e as data};

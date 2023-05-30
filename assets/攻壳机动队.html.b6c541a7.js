@@ -1,0 +1,1 @@
+const e={key:"v-04c2f81a",path:"/anime/1995/%E6%94%BB%E5%A3%B3%E6%9C%BA%E5%8A%A8%E9%98%9F.html",title:"\u653B\u58F3\u673A\u52A8\u961F",lang:"en-US",frontmatter:{release_date:"1995-01"},excerpt:"",headers:[{level:2,title:"\u9524",slug:"\u9524",children:[]}],filePathRelative:"anime/1995/\u653B\u58F3\u673A\u52A8\u961F.md"};export{e as data};

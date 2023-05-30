@@ -1,0 +1,1 @@
+const e={key:"v-cf723c48",path:"/anime/2006/NANA.html",title:"NANA",lang:"en-US",frontmatter:{release_date:"2006-01"},excerpt:"",headers:[{level:2,title:"\u672C\u5B50",slug:"\u672C\u5B50",children:[]}],filePathRelative:"anime/2006/NANA.md"};export{e as data};

@@ -1,0 +1,1 @@
+const e={key:"v-12098994",path:"/anime/2022/Engage%20Kiss.html",title:"Engage Kiss",lang:"en-US",frontmatter:{release_date:"2022-07"},excerpt:"",headers:[{level:2,title:"bjzx",slug:"bjzx",children:[]},{level:2,title:"xxd",slug:"xxd",children:[]},{level:2,title:"blg",slug:"blg",children:[]}],filePathRelative:"anime/2022/Engage Kiss.md"};export{e as data};

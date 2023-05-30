@@ -1,0 +1,1 @@
+const e={key:"v-62bee955",path:"/anime/2012/TARITARI.html",title:"TARITARI",lang:"en-US",frontmatter:{release_date:"2012-07"},excerpt:"",headers:[{level:2,title:"bjzx",slug:"bjzx",children:[]}],filePathRelative:"anime/2012/TARITARI.md"};export{e as data};

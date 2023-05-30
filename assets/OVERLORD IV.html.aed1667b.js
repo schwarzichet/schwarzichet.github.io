@@ -1,0 +1,1 @@
+const e={key:"v-61f26b8f",path:"/anime/2022/OVERLORD%20IV.html",title:"OVERLORD IV",lang:"en-US",frontmatter:{release_date:"2022-07"},excerpt:"",headers:[{level:2,title:"blg",slug:"blg",children:[]}],filePathRelative:"anime/2022/OVERLORD IV.md"};export{e as data};

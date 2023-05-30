@@ -1,0 +1,1 @@
+const e={key:"v-53855d38",path:"/game/2007/Elona.html",title:"Elona",lang:"en-US",frontmatter:{release_date:"2007-08-31"},excerpt:"",headers:[{level:2,title:"xgs",slug:"xgs",children:[]}],filePathRelative:"game/2007/Elona.md"};export{e as data};

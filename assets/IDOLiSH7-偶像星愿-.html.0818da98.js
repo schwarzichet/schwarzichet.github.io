@@ -1,0 +1,1 @@
+const e={key:"v-ed63bd38",path:"/anime/2018/IDOLiSH7-%E5%81%B6%E5%83%8F%E6%98%9F%E6%84%BF-.html",title:"IDOLiSH7-\u5076\u50CF\u661F\u613F-",lang:"en-US",frontmatter:{release_date:"2018-01"},excerpt:"",headers:[{level:2,title:"\u672C\u5B50",slug:"\u672C\u5B50",children:[]}],filePathRelative:"anime/2018/IDOLiSH7-\u5076\u50CF\u661F\u613F-.md"};export{e as data};

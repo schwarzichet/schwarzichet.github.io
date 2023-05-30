@@ -1,0 +1,1 @@
+const e={key:"v-cda8e64c",path:"/game/2021/Bravely%20Default%20%E2%85%A1.html",title:"Bravely Default \u2161",lang:"en-US",frontmatter:{release_date:"2021-02-26"},excerpt:"",headers:[{level:2,title:"db",slug:"db",children:[]},{level:2,title:"sword",slug:"sword",children:[]}],filePathRelative:"game/2021/Bravely Default \u2161.md"};export{e as data};
